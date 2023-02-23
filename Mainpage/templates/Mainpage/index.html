@@ -1,0 +1,545 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% block title %}Home - Dresswala {% endblock %}
+  {% block style %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Labrada&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
+
+    body {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      overflow: hidden;
+      overflow-y: scroll;
+    }
+
+    .main-crousals {
+      margin-top: 100px;
+      height: 400px;
+      width: 100%;
+    }
+
+    .main-crousals .carousel-item img {
+      height: 400px;
+      width: 100%;
+    }
+
+    .container {
+      height: auto;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .container .content {
+      height: auto;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .container .content .contain {
+      height: 400px;
+      width: 30%;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+
+    .container .content .contain img {
+      height: 100%;
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .container .main {
+      height: 500px;
+      width: 100%;
+      margin-top: 50px;
+      font-family: 'Nunito', sans-serif;
+      padding: 20px;
+    }
+
+    .container .main .cards {
+      height: auto;
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      scrollbar-width: thin;
+      scrollbar-color: #b0d6e9 #ffffff;
+    }
+
+    .container .main .cards::-webkit-scrollbar {
+      width: 16px;
+    }
+
+    .container .main .cards::-webkit-scrollbar-track {
+      background: #ffffff;
+    }
+
+    .container .main .cards::-webkit-scrollbar-thumb {
+      background-color: #b0d6e9;
+      border-radius: 10px;
+      border: 3px solid #ffffff;
+    }
+
+    .container .main .cards .card {
+      height: 500px;
+      width: 300px;
+      display: inline-block;
+      overflow: hidden;
+      margin-right: 20px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    .container .main .cards .card .card-img {
+      height: 65%;
+      border-radius: 10px;
+    }
+
+    .container .main .cards .card .card-content {
+      height: 35%;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .container .main .cards .card .card-content .heading {
+      width: 100%;
+    }
+
+    .container .main .cards .card .card-content button {
+      background-color: #24a8ea;
+      border: none;
+    }
+
+    .container .contain {
+      height: auto;
+      margin-top: 150px;
+      font-family: 'Labrada', serif;
+    }
+
+    .container .contain .boxs {
+      height: 1600px;
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      border-radius: 10px;
+    }
+
+    .container .contain .boxs .box1 {
+      height: 25%;
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container .contain .boxs .box1 img {
+      height: 100%;
+      width: 100%;
+    }
+
+    .container .contain .boxs .box2 img {
+      height: 100%;
+      width: 100%;
+    }
+
+    .container .contain .boxs .box2 {
+      height: 25%;
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container .contain .boxs .box2 .heading {
+      width: 100%;
+    }
+
+    .container .contain .boxs .box2 .heading button {
+      padding: 10px;
+      font-size: 20px;
+      width: 150px;
+      background-color: cadetblue;
+      border: none;
+    }
+
+    .container .contain .boxs .box1 .heading {
+      width: 100%;
+    }
+
+    .container .contain .boxs .box1 .heading button {
+      padding: 10px;
+      font-size: 20px;
+      width: 150px;
+      background-color: cadetblue;
+      border: none;
+    }
+
+    @media screen and (max-width: 992px) {
+      .container .content .contain {
+        height: 250px;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      .main-crousals {
+        height: 350px;
+      }
+
+      .main-crousals .carousel-item img {
+        height: 350px;
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .container .contain .boxs {
+        height: 2500px;
+      }
+
+      .container .contain .boxs .box1 {
+        height: 12%;
+        width: 100%;
+      }
+
+      .container .contain .boxs .box2 {
+        height: 12%;
+        width: 100%;
+      }
+
+      h2 {
+        margin-top: 100px;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .main-crousals {
+        height: 250px;
+      }
+
+      .main-crousals .carousel-item img {
+        height: 250px;
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      .main-crousals {
+        height: 230px;
+      }
+
+      .main-crousals .carousel-item img {
+        height: 230px;
+        width: 100%;
+      }
+
+      .container .content {
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container .content .contain {
+        height: 350px;
+        width: 90%;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      .container .content .contain {
+        height: 350px;
+        width: 98%;
+      }
+    }
+  </style>
+  {% endblock %}
+</head>
+
+<body>
+  {% block body %}
+  {% if messages %}
+  <ul class="messages" id="message">
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+      {{message}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <div id="carouselDarkVariant" class="main-crousals carousel slide carousel-fade carousel-dark relative"
+    data-bs-ride="carousel">
+    <div class="carousel-inner relative w-full overflow-hidden">
+      <div class="carousel-item active relative float-left w-full" style=" height: 100vh; width: 100%;">
+        <img src="{% static 'images/main2.png' %}" class="block w-full" alt="Motorbike Smoke" />
+      </div>
+
+      <div class="carousel-item relative float-left w-full" style=" height: 100vh; width: 100%;">
+        <img src="{% static 'images/main1.png' %}" class="block w-full" alt="Mountaintop" />
+      </div>
+
+      <div class="carousel-item relative float-left w-full" style=" height: 100vh; width: 100%;">
+        <img src="{% static 'images/3.png' %}" class="block w-full" alt="" />
+      </div>
+
+    </div>
+    <button
+      class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
+      type="button" data-bs-target="#carouselDarkVariant" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
+      type="button" data-bs-target="#carouselDarkVariant" data-bs-slide="next">
+      <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="container">
+    <h3>Best Seller</h3>
+    <div class="content">
+      <div class="contain">
+        <a href="/festival/">
+          <img src="{% static 'images/navratri.jpg' %}" alt="">
+        </a>
+      </div>
+      <div class="contain">
+        <a href="/Patriotic/">
+          <img src="{% static 'images/shivaji.webp' %}" alt="">
+        </a>
+      </div>
+      <div class="contain">
+        <a href="/Marriage/">
+          <img src="{% static 'images/marriege1.jpg' %}" alt="">
+        </a>
+      </div>
+    </div>
+    <div class="main">
+      <h4><b>Similar Items You Might Like</b></h4>
+      <div class="cards">
+        {% for i in products %}
+        <div class="card">
+          <div class="card-img">
+            <img style="height: 100%; width: 100%;" src="/media/{{i.product_img}}" alt="">
+          </div>
+          <div class="card-content">
+            <div class="heading">
+              <h6><b>{{i.product_name}}</b></h6>
+              <p><b>₹ {{i.product_price}}</b></p>
+            </div>
+            <a href="/product/{{i.id}}"><button type="button" style="margin-right: 10px;"
+                class="btn btn-primary">View</button></a>
+            <form action="/Mycart/" method="post">{% csrf_token %}
+              <input type="hidden" value="1" name="qtys" id="">
+              <input type="hidden" value="{{i.id}}" name="product_id" id="">
+              <button type="submit" class="btn btn-primary">Add to cart</button>
+            </form>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="contain">
+      <h3 style="text-align: center;">Welcome to India's largest costume Rental Store
+      </h3>
+      <div class="boxs">
+        <div class="box1">
+          <img src="{% static 'images/festival.png' %}" alt="">
+        </div>
+        <div class="box2">
+          <div class="heading">
+            <h1>Festival Costume</h1>
+            <p>The most enthusiastic time of the year! From dance to drama to festival.. We have costumes to become
+              whatever you need.
+            </p>
+            <form action="/festival/" method="post">{% csrf_token %}
+              <button class="btn">Rent Now</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="box1">
+          <div class="heading">
+            <h1>Halloween</h1>
+            <p>Be the most “Hatke” character this halloween.! From kids to adults, we have options for all.
+            </p>
+            <form action="/Halloween/" method="post">{% csrf_token %}
+              <button class="btn">Rent Now</button>
+            </form>
+          </div>
+        </div>
+        <div class="box2">
+          <img src="{% static 'images/enjoy.png' %}" alt="">
+        </div>
+
+        <div class="box1">
+          <img src="{% static 'images/marriege.png' %}" alt="">
+        </div>
+        <div class="box2">
+          <div class="heading">
+            <h1>Marriage Costume</h1>
+            <p>Marriage Costume for men and women</p>
+            <form action="/Marriage/" method="post">{% csrf_token %}
+              <button class="btn">Rent Now</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="box1">
+          <div class="heading">
+            <h1>Patriotic Dresses</h1>
+            <p>The prides of our nation- Tiranga, Forces uniform.. celebrate them with us!
+            </p>
+            <form action="/Patriotic/" method="post">{% csrf_token %}
+              <button class="btn">Rent Now</button>
+            </form>
+          </div>
+        </div>
+        <div class="box2">
+          <img src="{% static 'images/army.png' %}" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2 style="text-align: center; margin-top: 30px;">Our Client says</h2>
+  <div class="outerdiv">
+    <div class="innerdiv">
+      <!-- div1 -->
+      <div class="div1 eachdiv">
+        <div class="userdetails">
+          <div class="imgbox">
+            <img
+              src="https://raw.githubusercontent.com/RahulSahOfficial/testimonials_grid_section/5532c958b7d3c9b910a216b198fdd21c73112d84/images/image-daniel.jpg"
+              alt="">
+          </div>
+          <div class="detbox">
+            <h5 class="name">Naya Acharya</h5>
+          </div>
+        </div>
+        <div class="review">
+          <h4>What I appreciate most about these dresses is the versatility. They are perfect for a wide range of
+            occasions, for casual brunch to fancy dinners.</h4>
+          <p>“ Wow, I am blown away by these new dresses! The attention to detail is incredible, and the quality is
+            unmatched. I recently purchased the [specific dress name], and it has quickly become my new favorite dress.
+            The fabric is so soft and luxurious, and the fit is absolutely perfect. I love the way it hugs my curves
+            without feeling too tight or restrictive. ”</p>
+        </div>
+      </div>
+      <!-- div2 -->
+      <div class="div2 eachdiv">
+        <div class="userdetails">
+          <div class="imgbox">
+            <img
+              src="https://raw.githubusercontent.com/RahulSahOfficial/testimonials_grid_section/5532c958b7d3c9b910a216b198fdd21c73112d84/images/image-jonathan.jpg"
+              alt="">
+          </div>
+          <div class="detbox">
+            <p class="name">Ishaan Varma</p>
+          </div>
+        </div>
+        <div class="review">
+          <h4>The delivery management is too good.</h4>
+          <p>“ Dressswala has amazing time management skills. I had a great first experience. ”</p>
+        </div>
+      </div>
+      <!-- div3 -->
+      <div class="div3 eachdiv">
+        <div class="userdetails">
+          <div class="imgbox">
+            <img
+              src="https://raw.githubusercontent.com/RahulSahOfficial/testimonials_grid_section/5532c958b7d3c9b910a216b198fdd21c73112d84/images/image-kira.jpg"
+              alt="">
+          </div>
+          <div class="detbox">
+            <p class="name dark">Kira Whittle</p>
+          </div>
+        </div>
+        <div class="review dark">
+          <h4>Such a life-changing experience. Highly recommended!</h4>
+          <p>“ I've worn my traditional dress to a wedding, a cocktail party, and even to work with a blazer over it.
+            It's so easy to dress up or down, depending on the occasion. let's talk about the colors and patterns - they
+            are absolutely stunning. I love how unique and eye-catching each one is. I have my eye on the [specific
+            dress name] in the gorgeous floral print next!
+            Overall, I highly recommend these new dresses to anyone looking for high-quality, versatile, and stunning
+            dresses. They are definitely worth the investment, and I know I'll be wearing mine for years to come. ”</p>
+        </div>
+      </div>
+      <!-- div4 -->
+      <div class="div4 eachdiv">
+        <div class="userdetails">
+          <div class="imgbox">
+            <img
+              src="https://raw.githubusercontent.com/RahulSahOfficial/testimonials_grid_section/5532c958b7d3c9b910a216b198fdd21c73112d84/images/image-jeanette.jpg"
+              alt="">
+          </div>
+          <div class="detbox">
+            <p class="name dark">Inaya Ahuja</p>
+          </div>
+        </div>
+        <div class="review dark">
+          <h4>An overall wonderful and rewarding experience</h4>
+          <p>“ Overall, I highly recommend these dresses to anyone in the market for some new additions to their
+            wardrobe. They are versatile, well-made, and stylish, making them perfect for a variety of occasions. ”</p>
+        </div>
+      </div>
+      <!-- div5 -->
+      <div class="div5 eachdiv">
+        <div class="userdetails">
+          <div class="imgbox">
+            <img
+              src="https://raw.githubusercontent.com/RahulSahOfficial/testimonials_grid_section/5532c958b7d3c9b910a216b198fdd21c73112d84/images/image-patrick.jpg"
+              alt="">
+          </div>
+          <div class="detbox">
+            <p class="name">Jai Patel</p>
+          </div>
+        </div>
+        <div class="review">
+          <h4>I really appreciate about these dresses is the attention to detail in the design. </h4>
+          <p>“ I recently rented two new dresses from [Brand Name], and I have to say, I am in love with both of them!
+            The first dress is a beautiful floral print with a flattering wrap design that cinches in at the waist. The
+            fabric is lightweight and perfect for a summer day, but also works well layered with a cardigan for cooler
+            weather. The second dress is a sleek and sophisticated midi dress in a classic black color. It hugs my
+            curves in all the right places and is incredibly comfortable to wear. ”</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% block script %}
+<script>
+
+</script>
+{% endblock %}

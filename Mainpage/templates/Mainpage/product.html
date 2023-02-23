@@ -1,0 +1,184 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %}My product - Dresswala {% endblock %}
+    {% block style %}
+    <style>
+        .main {
+            margin-top: 100px;
+            padding: 20px;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+
+        .main .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .main .container .part1 {
+            height: auto;
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main .container .part1 img {
+            height: auto;
+            width: 90%;
+        }
+
+        .main .container .part2 {
+            height: auto;
+            width: 60%;
+            padding: 20px;
+        }
+
+        .main .container .part2 .qty {
+            display: flex;
+            gap: 10px;
+        }
+
+        .main .container .part2 .qty button {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            background-color: #24a8ea;
+            border: none;
+        }
+
+        .main .container .part2 .qty h4 {
+            height: 40px;
+            width: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main .container .part2 .rent-btn button {
+            height: 50px;
+            background-color: #24a8ea;
+            border: none;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .main .container .part1 {
+                align-items: start;
+                padding: 10px;
+            }
+
+        }
+
+        @media screen and (max-width: 600px) {
+            .main .container .part1 {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .main .container .part2 {
+                width: 100%;
+                padding: 40px;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .main {
+                padding: 0;
+            }
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    {% if messages %}
+    <ul class="messages" id="message">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="main">
+        {% for i in products %}
+        <div class="container">
+            <div class="part1">
+                <img src="/media/{{i.product_img}}" alt="">
+            </div>
+            <div class="part2">
+                <div class="heading">
+                    <h3>{{i.product_name}}</h3>
+                </div><br><br>
+                <div class="disc">
+                    <h6>{{i.product_desc}}</h6>
+                </div><br><br>
+                <div class="qty">
+                    <button onclick="dec_func()"><i style="font-size:15px; color: white;"
+                            class="fa">&#xf068;</i></button>
+                    <h4 id="qauntity">1</h4> <button onclick="inc_func()"><i style="font-size:15px; color: white;"
+                            class="fa">&#xf067;</i></button>
+                </div><br><br>
+                <div class="rent-btn">
+                    <form action="/Mycart/" method="post">{% csrf_token %}
+                        <input type="hidden" value="{{i.id}}" name="product_id" id="">
+                        <input type="hidden" name="qtys" id="qtys">
+                        <button type="submit" id="rent-btn">Rent Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% block script %}
+<script>
+    let value = 1
+    function inc_func() {
+        value = parseInt(document.getElementById("qauntity").innerText) + 1;
+        if (value > 10) {
+            value = 10;
+        }
+        document.getElementById("qauntity").innerText = value;
+    }
+    function dec_func() {
+        value = parseInt(document.getElementById("qauntity").innerText) - 1;
+        if (value < 1) {
+            value = 1;
+        }
+        document.getElementById("qauntity").innerText = value;
+    }
+    document.getElementById("rent-btn").addEventListener("click", () => {
+        document.getElementById("qtys").value = value
+    })
+</script>
+{% endblock %}

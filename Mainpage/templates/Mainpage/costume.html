@@ -1,0 +1,198 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %}All Costumes - Dresswala {% endblock %}
+    {% block style %}
+    <style>
+        .main {
+            margin-top: 100px;
+            padding: 20px;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+
+        .main .header-part {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            height: 70px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: scroll;
+        }
+
+        .main .header-part .category button {
+            height: 45px;
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 18px;
+            border-radius: 20px;
+            background-color: rgb(88, 204, 208);
+            border: none;
+            transition-duration: 1s;
+        }
+
+        .main .header-part .category button:hover {
+            background-color: rgb(0, 78, 223);
+            color: white;
+        }
+
+        .main .header-part::-webkit-scrollbar {
+            display: none;
+        }
+
+        .main .content {
+            height: auto;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 50px;
+        }
+
+        .main .content .box {
+            height: 500px;
+            width: 300px;
+            margin: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 10px;
+        }
+
+        .main .content .box .img-part {
+            height: 65%;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .main .content .box .img-part img {
+            border-radius: 10px;
+        }
+
+        .main .content .box .card-content {
+            height: 35%;
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .main .content .box .card-content .heading {
+            width: 100%;
+        }
+
+        .main .content .box .card-content button {
+            background-color: #24a8ea;
+            border: none;
+        }
+
+        @media screen and (max-width : 700px) {
+            .main .header-part {
+                justify-content: left;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            .main .content {
+                padding: 0;
+                justify-content: center;
+            }
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    {% if messages %}
+    <ul class="messages" id="message">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="main">
+        <div class="header-part">
+            <div class="category">
+                <form action="/costumes/" method="post">{% csrf_token %}
+                    <button type="submit">All</button>
+                </form>
+            </div>
+            <div class="category">
+                <form action="/festival/" method="post">{% csrf_token %}
+                    <button type="submit">Festival</button>
+                </form>
+            </div>
+            <div class="category">
+                <form action="/Marriage/" method="post">{% csrf_token %}
+                    <button type="submit">Marriage</button>
+                </form>
+            </div>
+            <div class="category">
+                <form action="/Halloween/" method="post">{% csrf_token %}
+                    <button type="submit">Halloween</button>
+                </form>
+            </div>
+            <div class="category">
+                <form action="/Patriotic/" method="post">{% csrf_token %}
+                    <button type="submit">Patriotic</button>
+                </form>
+            </div>
+            <div class="category">
+                <form action="/Party/" method="post">{% csrf_token %}
+                    <button type="submit">Party</button>
+                </form>
+            </div>
+        </div>
+        <div class="content">
+            {% for i in products %}
+            <div class="box">
+                <div class="img-part">
+                    <img style="height: 100%; width: 100%;" src="/media/{{i.product_img}}" alt="">
+                </div>
+                <div class="card-content">
+                    <div class="heading">
+                        <h6><b>{{i.product_name}}</b></h6>
+                        <p><b>₹ {{i.product_price}}</b></p>
+                    </div>
+                    <a href="/product/{{i.id}}"><button type="button" style="margin-right: 10px;"
+                            class="btn btn-primary">View</button></a>
+                    <form action="/Mycart/" method="post">{% csrf_token %}
+                        <input type="hidden" value="1" name="qtys" id="">
+                        <input type="hidden" value="{{i.id}}" name="product_id" id="">
+                        <button type="submit" class="btn btn-primary">Add to cart</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% block script %}
+<script>
+
+</script>
+{% endblock %}

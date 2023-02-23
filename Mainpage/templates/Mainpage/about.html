@@ -1,0 +1,130 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %}About - Dresswala {% endblock %}
+    {% block style %}
+    <style>
+        .main {
+            display: flex;
+            margin-top: 100px;
+            flex-wrap: wrap;
+        }
+
+        .main .box1 {
+            width: 50%;
+        }
+
+        .main .box1 img {
+            height: 80%;
+            width: 100%;
+        }
+
+        .main .box2 {
+            width: 50%;
+            padding: 20px;
+        }
+
+        @media screen and (max-width:1200px) {
+            .main .box1 img {
+                height: 60%;
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width:1000px) {
+            .main .box1 img {
+                height: 50%;
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width:900px) {
+            .main .box1 {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+
+            .main .box1 img {
+                height: 100%;
+                width: 100%;
+            }
+
+            .main .box2 {
+                width: 100%;
+            }
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    {% if messages %}
+    <ul class="messages" id="message">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <di class="main">
+        <div class="box1">
+            <img src="{% static 'images/team.jpg' %}" alt="">
+        </div>
+        <div class="box2">
+            <h3 style="text-align: center;">HOW DRESS RENT WORKS
+            </h3> <br>
+            <br>
+            <p>
+                1. Book the dress at store or online by paying Rent amount. We will take your measurement at store or
+                you can provide through phone/WhatsApp. <br><br>
+
+                2. Collect the dress one day before your function and pay security deposit as mentioned at store.
+                <br><br>
+
+                3. Return the dress one day after your function. We will return your security deposit at store. <br><br>
+
+                4. Online Booking Policy: <br><br>
+
+                We deliver in all cities by courier from head office store in Ahmedabad. Rent and security is mentioned
+                there under every image on the website. you can click on dress image to see their multiple images/video
+                and security amount. Size we will alter as per ur size. U will get the dress 2 days before your event
+                for advanced booking. U need to courier back the dress next day after ur function. Rent amount is
+                charged one time only for a booking. One side courier charges we will pay and return courier charges
+                customer need to pay. <br><br>
+
+                Rent to pay for booking confirmation, security to pay on day we courier from Gurgaon. Security refunded
+                same day we get dress back. <br><br>
+
+                Rent under 1000 Rs, courier charges will applicable on both side. <br><br>
+
+                5. Payment mode can be cash at store or paytm, Google Pay or any Wallet or bank transfer.<br><br>
+
+                6. For below rent 1000 dresses, discount is not applicable.<br><br>
+
+                7. 50% refund on cancellation (cancellation before dress delivery/dispatch).<br><br>
+
+
+            </p>
+        </div>
+    </di>
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% block script %}
+<script>
+
+</script>
+{% endblock %}

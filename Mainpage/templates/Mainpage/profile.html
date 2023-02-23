@@ -1,0 +1,201 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %}
+    My Profile
+    {% endblock %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    {% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <style>
+        .containers {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 120px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .containers .userprofile {
+            width: 80%;
+            display: flex;
+            padding: 20px;
+        }
+
+        .containers .userprofile .images {
+            width: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .containers .userprofile .userdetails {
+            width: 50%;
+        }
+
+        .containers .userprofile .editbtn {
+            width: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main .myorder {
+            width: 80%;
+            padding: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 20px;
+        }
+
+        .main .myorder .order {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid black;
+            border-radius: 10px;
+            flex-wrap: wrap;
+        }
+
+        .main .myorder .order .part1 {
+            width: 40%;
+            padding: 10px;
+        }
+
+        .main .myorder .order .part2 {
+            width: 60%;
+            padding: 20px;
+        }
+
+        .logout-btn {
+            padding-left: 150px;
+            padding-right: 150px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .containers .userprofile {
+                height: 400px;
+                padding: 0;
+                flex-wrap: wrap;
+            }
+
+            .containers .userprofile .images {
+                height: 35%;
+                width: 100%;
+            }
+
+            .containers .userprofile .userdetails {
+                height: 35%;
+                width: 100%;
+                text-align: center;
+            }
+
+            .containers .userprofile .editbtn {
+                height: 30%;
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width : 600px) {
+            .main .myorder {
+                width: 95%;
+            }
+        }
+
+        @media screen and (max-width : 500px) {
+            .logout-btn {
+                padding-left: 50px;
+                padding-right: 50px;
+            }
+            .main .myorder .order .part1 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+            .main .myorder .order .part2 {
+                width: 100%;
+            }
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    {% if messages %}
+    <ul class="messages" id="message">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="containers">
+        <div class="userprofile" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; border-radius: 20px;">
+            <div class="images">
+                <div class="userimg">
+                    <i style='font-size:100px' class='fas'>&#xf406;</i>
+                </div>
+            </div>
+            <div class="userdetails">
+                <h5>{{user.first_name}} {{user.last_name}}</h5>
+                <h5>{{user.username}}</h5>
+                <h5>{{user.email}}</h5>
+            </div>
+            <div class="editbtn">
+                <a href="/edit-profile/"><button type="button" id="main_btn" class="btn btn-primary">Edit profile</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="myorder">
+            <h3 style="text-align: center;">My Orders</h3>
+            {% if order_datas %}
+            {% for i in order_datas %}
+            <div class="order">
+                <div class="part1">
+                    <img style="height: 100%; width: 180px;" src="/media/{{i.product_img}}" alt="">
+                </div>
+                <div class="part2">
+                    <h5>{{i.product_name}}</h5><br>
+                    <h5>Qty. {{i.qty}}</h5><br>
+                    <h5>₹ {{i.product_price}}</h5><br>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h5>No any orders yet</h5>
+            {% endif %}
+        </div>
+    </div>
+    <div class="logout-btn" style="margin-top: 30px;">
+        <a href="/logout/"><button type="button" style="width: 100%;" id="main_btn"
+                class="btn btn-primary">Logout</button></a>
+    </div>
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% block script %}
+<script>
+
+</script>
+{% endblock %}

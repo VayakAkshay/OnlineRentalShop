@@ -1,0 +1,458 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %} {% endblock %}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/6e04d39f81.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <style>
+    header {
+      height: 100px;
+      width: 100%;
+      overflow: hidden;
+      background-color: white;
+      position: fixed;
+      top: 0;
+      display: flex;
+      font-family: 'Rubik', sans-serif;
+      flex-wrap: wrap;
+      z-index: 6;
+      transition-duration: 2s;
+    }
+
+    .messages {
+      margin-top: 100px;
+      width: 98%;
+    }
+
+    header .logo {
+      height: 100px;
+      width: 25%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 25px;
+      color: black;
+    }
+
+    header .logo a {
+      text-decoration: none;
+      color: black;
+    }
+
+    header .navbar {
+      height: 100px;
+      width: 75%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header .navbar .nav1 {
+      height: 100%;
+      width: 50%;
+    }
+
+    header .navbar .nav2 {
+      height: 100%;
+      width: 50%;
+    }
+
+    header .navbar ul {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      justify-content: center;
+    }
+
+    header .navbar ul li {
+      list-style: none;
+      display: inline-block;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    header .navbar ul li a {
+      text-decoration: none;
+      color: black;
+      font-size: 20px;
+    }
+
+    header .navbar .nav2 ul li .userandcart {
+      width: 100%;
+      display: flex;
+    }
+
+    header .navbar .nav2 ul li .userandcart .cartbtn {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    header .navbar .nav2 ul li .userandcart button {
+      height: 50px;
+      width: 90px;
+      background-color: white;
+      border-radius: 10px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    header .navbar .nav2 ul li .userbutton {
+      min-width: 120px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border: 2px solid black;
+    }
+
+    header .navbar .nav2 ul li button a {
+      color: black;
+    }
+
+    .menu {
+      display: inline-block;
+      cursor: pointer;
+      padding: 30px;
+      position: static;
+      display: none;
+    }
+
+    .bar1,
+    .bar2,
+    .bar3 {
+      width: 35px;
+      height: 5px;
+      background-color: black;
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+
+    .change .bar1 {
+      transform: translate(0, 11px) rotate(-45deg);
+    }
+
+    .change .bar2 {
+      opacity: 0;
+    }
+
+    .change .bar3 {
+      transform: translate(0, -11px) rotate(45deg);
+    }
+
+    @media screen and (max-width : 1005px) {
+      .menu {
+        display: block;
+      }
+
+      header {
+        height: 100px;
+      }
+
+      header .navbar {
+        justify-content: end;
+        animation-duration: 1s;
+      }
+
+      header .navbar .nav1 {
+        display: none;
+      }
+
+      header .navbar .nav2 {
+        display: none;
+      }
+
+      header .dropdownmenu .nav1 {
+        height: 70%;
+      }
+
+      header .dropdownmenu .nav2 {
+        margin-top: 0;
+      }
+
+      header .dropdownmenu {
+        height: 450px;
+        width: 100%;
+        animation-duration: 1s;
+      }
+
+      header .dropdownmenu ul {
+        padding: 20px;
+        text-align: center;
+      }
+
+      header .dropdownmenu ul li {
+        list-style: none;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 10px;
+      }
+
+      header .dropdownmenu ul li a {
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+      }
+
+      header .dropdownmenu .nav2 ul li button {
+        height: 50px;
+        width: 90px;
+        background-color: white;
+        border-radius: 10px;
+      }
+
+      header .dropdownmenu .nav2 ul li .userbutton {
+        width: auto;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      header .dropdownmenu .nav2 ul li button a {
+        color: black;
+      }
+
+      .change-dropdown {
+        height: 550px;
+      }
+    }
+
+    @media screen and (max-width : 600px) {
+      header .logo {
+        width: 35%;
+      }
+
+      header .navbar {
+        width: 65%;
+      }
+    }
+
+    @media screen and (max-width : 500px) {
+      header .logo {
+        width: 45%;
+      }
+
+      header .navbar {
+        width: 55%;
+      }
+    }
+
+    @media screen and (max-width : 400px) {
+      header .logo {
+        width: 60%;
+      }
+
+      header .navbar {
+        width: 40%;
+      }
+    }
+  </style>
+  {% block style %}
+  {% endblock %}
+</head>
+
+<body>
+  <header id="dropdownmenu">
+    <div class="logo"><a href="/">DressWala</a></div>
+    <div class="navbar">
+      <div class="nav1">
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/costumes/">Costumes</a>
+          </li>
+          <li>
+            <a href="/contact/">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div class="nav2">
+        <ul>
+          <li>
+            <div class="userandcart">
+              <div class="cartbtn">
+                <a href="/Mycart/"><i style="font-size:25px" class="fa">&#xf07a;</i> Cart</a>
+              </div>
+              {% if user.is_authenticated %}
+              <a href="/profile/">
+                <button class="userbutton">
+                  <i style='font-size:24px' class='fas'>&#xf406;</i>
+                  {{user.first_name}}
+                </button>
+              </a>
+              {% else %}
+              <a href="/login/"><button>Login</button></a>
+              {% endif %}
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="menu" onclick="myFunction(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+    </div>
+    <div class="dropdownmenu">
+      <div class="nav1">
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/about/">About</a>
+          </li>
+          <li>
+            <a href="/costume/">Costumes</a>
+          </li>
+          <li>
+            <a href="/contact/">Contact</a>
+          </li>
+          <li>
+            <a href=""><i style="font-size:25px" class="fa">&#xf07a;</i> Cart</a>
+          </li>
+        </ul>
+      </div>
+      <div class="nav2">
+        <ul>
+          <li>
+            {% if user.is_authenticated %}
+            <a href="/profile/">
+              <button class="userbutton">
+                <i style='font-size:24px' class='fas'>&#xf406;</i>
+                {{username}}
+              </button>
+            </a>
+            {% else %}
+            <a href="/login/"><button>Login</button></a>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  {% block body %}
+  {% endblock %}
+  <div class="container my-5">
+    <footer class="text-center text-lg-start text-white" style="background-color: #45526e">
+      <div class="container p-4 pb-0">
+        <section class="">
+          <div class="row">
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold">
+                DressWala
+              </h6>
+              <p>
+                Welcome to dresswala, your one-stop-shop for stylish dresses that won't break the bank. We offer a wide
+                selection of beautiful dresses for any occasion, whether you're attending a wedding, prom.
+              </p>
+            </div>
+
+            <hr class="w-100 clearfix d-md-none" />
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+              <p>
+                <a href="/festival/" style="color: white;">Festival</a>
+              </p>
+              <p>
+                <a href="/Halloween/" style="color: white;">Halloween</a>
+              </p>
+              <p>
+                <a href="/Marriage/" style="color: white;">Marriage</a>
+              </p>
+              <p>
+                <a href="/Patriotic/" style="color: white;">Patriotic</a>
+              </p>
+            </div>
+
+            <hr class="w-100 clearfix d-md-none" />
+
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold">
+                Useful links
+              </h6>
+              <p>
+                <a class="text-white" style="cursor: pointer;">Your Account</a>
+              </p>
+              <p>
+                <a class="text-white" style="cursor: pointer;">About Us</a>
+              </p>
+              <p>
+                <a class="text-white" style="cursor: pointer;">Contact Us</a>
+              </p>
+              <p>
+                <a class="text-white" style="cursor: pointer;">Help</a>
+              </p>
+            </div>
+
+            <hr class="w-100 clearfix d-md-none" />
+
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+              <p><i class="fa fa-home"></i> Navrangpura, Ahmedabad</p>
+              <p><i class="fa fa-envelope"></i> info.dresswala@gmail.com</p>
+              <p><i class="fa fa-phone"></i> + 99 44 88 77 66</p>
+              <p><i class="fa fa-print"></i> + 63 88 44 77 22</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="my-3">
+
+        <section class="p-3 pt-0">
+          <div class="row d-flex align-items-center">
+            <div class="col-md-7 col-lg-8 text-center text-md-start">
+              <div class="p-3">
+                © 2023 Copyright:
+                <a class="text-white" href="https://dresswala.com/">dresswala.com</a>
+              </div>
+            </div>
+            <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+              <a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i
+                  class="fa fa-facebook"></i></a>
+              <a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i
+                  class="fa fa-twitter"></i></a>
+
+              <a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i
+                  class="fa fa-instagram"></i></a>
+
+              <a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i
+                  class="fa fa-skype"></i></a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
+<script>
+  function myFunction(x) {
+    x.classList.toggle("change");
+    document.getElementById("dropdownmenu").classList.toggle("change-dropdown");
+  }
+  if (document.getElementById("message")) {
+    setTimeout(() => {
+      document.getElementById("message").style.display = "none";
+    }, 2000);
+  }
+</script>
+{% block script %}
+{% endblock %}

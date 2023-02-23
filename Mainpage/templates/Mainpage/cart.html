@@ -1,0 +1,196 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %}My Cart - Dresswala {% endblock %}
+    {% block style %}
+    <style>
+        .main {
+            margin-top: 100px;
+            padding: 20px;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+
+        .main .container {
+            width: 60%;
+        }
+
+        .main .container .content {
+            display: flex;
+            width: 100%;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 10px;
+            height: auto;
+            padding: 10px;
+            flex-wrap: wrap;
+        }
+
+        .main .container .content .part1 {
+            height: auto;
+            width: 40%;
+            display: flex;
+            align-items: center;
+        }
+
+        .main .container .content .part1 img {
+            max-height: 200px;
+        }
+
+        .main .container .content .part2 {
+            height: auto;
+            width: 60%;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .main .container .content .part2 .heading {
+            width: 100%;
+        }
+
+        .main .container .content .part2 .price-remove {
+            width: 100%;
+            display: flex;
+            height: auto;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .main .container .content .part2 .qty {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .main .container .content .part2 .qty button {
+            height: 40px;
+            width: 200px;
+            background-color: #24a8ea;
+            border: none;
+        }
+
+        @media screen and (max-width: 1000px) {
+            .main .container {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            .main {
+                padding: 0;
+            }
+
+            .main .container .content .part2 .heading h3 {
+                font-size: 17px;
+            }
+
+            .main .container .content .part2 .qty button {
+                width: 150px;
+            }
+
+            .main .container .content .part2 .price-remove {
+                gap: 5px;
+            }
+        }
+
+        @media screen and (max-width: 450px) {
+
+            .main .container .content .part1 img {
+                max-height: 150px;
+            }
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    {% if messages %}
+    <ul class="messages" id="message">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="main">
+        <div class="container">
+            {% if user.is_authenticated %}
+            {% if mycartlist %}
+            {% for i in mycartlist %}
+            <div class="content">
+                <div class="part1">
+                    <img src="/media/{{i.product_img}}" alt="">
+                </div>
+                <div class="part2">
+                    <div class="heading">
+                        <h3>{{i.product_name}}</h3>
+                    </div><br>
+                    <div class="qty">
+                        <button type="button" class="btn btn-primary" style="background-color: #24a8ea;">Quantity -
+                            {{i.product_qty}}</button>
+                    </div><br>
+                    <div class="price-remove">
+                        <button type="button" class="btn btn-primary"
+                            style="background-color: #24a8ea; border: none;">Price - {{i.product_price}}</button>
+                        <form action="/removeitem/" method="post">{% csrf_token %}
+                            <input type="hidden" name="cart_id" value="{{i.cart_id}}" id="">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </div><br><br>
+            {% endfor %}
+            <button type="button" class="btn btn-success">Total Price - {{total_price}}</button>
+            <a href="/order/"><button type="button" class="btn btn-success">Rent Now</button></a>
+            {% else %}
+            <h3 style="text-align: center;">No any items in cart</h3>
+            {% endif %}
+            {% else %}
+            <h3 style="text-align: center;">First complete your login after then come to cart</h3>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% block script %}
+<script>
+    function inc_func() {
+        let inc_value = parseInt(document.getElementById("qauntity").innerText) + 1;
+        if (inc_value > 10) {
+            inc_value = 10;
+        }
+        document.getElementById("qauntity").innerText = inc_value;
+    }
+    function dec_func() {
+        let dec_value = parseInt(document.getElementById("qauntity").innerText) - 1;
+        if (dec_value < 1) {
+            dec_value = 1;
+        }
+        document.getElementById("qauntity").innerText = dec_value;
+    }
+</script>
+{% endblock %}
