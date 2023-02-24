@@ -45,7 +45,7 @@ def RegesterPage(request):
     
             subject = "OTP"
             body = """
-            Welcome to Crowd Funding 
+            Welcome to DressWala 
             Your OTP is - {}""".format(otp_generate)
             em = EmailMessage()
             em['from'] = email_sender
@@ -93,7 +93,7 @@ def forgot_otp(request):
             email_receiver = email
             subject = "OTP"
             body = """
-            Welcome to Crowd Funding 
+            Welcome to DressWala 
             Your OTP is - {}""".format(otp_generate)
             em = EmailMessage()
             em['from'] = email_sender
