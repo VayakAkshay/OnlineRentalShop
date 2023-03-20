@@ -116,11 +116,9 @@ def EditProfile(request):
         fname = request.POST.get("fname")
         lname = request.POST.get("lname")
         email = request.POST.get("email")
-        phone = request.POST.get("mobile")
         User.objects.filter(id = user.id).update(first_name = fname)
-        User.objects.filter(id = user.id).update(last_name = fname)
+        User.objects.filter(id = user.id).update(last_name = lname)
         User.objects.filter(id = user.id).update(username = email)
-        User.objects.filter(id = user.id).update(email = phone)
         return redirect('/profile/')
     return render(request, "Mainpage/edit_profile.html")
 
@@ -185,10 +183,12 @@ def success_page(request):
     CartData.objects.filter(user_id = user.id).delete()
     return render(request,"Mainpage/success.html")
 
+def PortfolioPage(request):
+    return render(request,"Mainpage/portfolio.html")
+
 def cancle_page(request):
     return render(request,"Mainpage/cancle.html")
 
 def logout_page(request):
     logout(request)
     return redirect("/")
-# 4500 3800 1500 

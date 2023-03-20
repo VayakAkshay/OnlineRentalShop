@@ -1,0 +1,412 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %}Home - Dresswala {% endblock %}
+    {% block style %}
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
+
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .img {
+            width: 500px;
+            border-radius: 5px;
+            cursor: zoom-in;
+            display: block;
+        }
+        .img:hover{
+            cursor: zoom-in;
+        }
+
+        .img-panel {
+            padding: 5px;
+            background-color: transparent;
+            height: auto;
+            width: auto;
+            display: inline-block;
+            transition: all 200ms ease;
+            border-radius: 5px;
+        }
+
+        .img-panel:hover {
+            background-color: #20A4F3;
+        }
+
+        .img-panel__selct {
+            background-color: #20A4F3;
+        }
+
+        .display-box {
+            padding: 1em;
+            margin: 1em auto;
+            display: flex;
+            grid-gap: 1em;
+            grid-template-columns: repeat(auto-fill, 210px);
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .img-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: transparent;
+            transition: all 200ms ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-wrapper__initial {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .image__selected {
+            max-width: 70vw;
+            max-height: 80vh;
+            display: block;
+            cursor: pointer;
+            transition: all 300ms ease-in-out;
+            position: relative;
+            border: transparent solid 4px;
+            border-radius: 5px;
+            margin-top: 100px;
+        }
+
+        .img-selected-initial {
+            border: white solid 4px;
+        }
+
+        .img-close {
+            height: 50px;
+            width: 50px;
+            position: absolute;
+            top: 110px;
+            left: 1.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 200ms ease-in-out;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 2px solid black;
+        }
+
+        .img-close:hover {
+            background-color: #CA3B4E;
+        }
+
+        .img-close:before {
+            content: " ";
+            height: 40px;
+            width: 5px;
+            background-color: white;
+            transform: rotate(45deg);
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .img-close:after {
+            content: " ";
+            height: 40px;
+            width: 5px;
+            transform: rotate(135deg);
+            position: absolute;
+            z-index: 100;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .add-img-fieldset {
+            padding: 1em;
+        }
+
+        .file-input {
+            visibility: hidden;
+        }
+
+        .file-input-label {
+            padding: 10px 15px;
+            background-color: #255F85;
+            border-radius: 3px;
+            font-family: sans-serif;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 300ms ease-in-out;
+        }
+
+        .file-input-label:hover {
+            background-color: #4C7C9B;
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    {% if messages %}
+    <ul class="messages" id="message">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div id="img-out"></div>
+
+    <section class="display-box" style="margin-top: 120px;" id="display-box">
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img7.jpg' %}"
+                alt="">
+        </div>
+
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img9.webp' %}"
+                alt="">
+        </div>
+
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img2.jpg' %}"
+                alt="">
+        </div>
+
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img4.png' %}"
+                alt="">
+        </div>
+
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img10.jpeg' %}"
+                alt="">
+        </div>
+
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img12.jpg' %}"
+                alt="">
+        </div>
+
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img13.jpg' %}"
+                alt="">
+        </div>
+
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img15.jpeg' %}"
+                alt="">
+        </div>
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img19.webp' %}"
+                alt="">
+        </div>
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img21.jpg' %}"
+                alt="">
+        </div>
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img22.webp' %}"
+                alt="">
+        </div>
+
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img23.jpg' %}"
+                alt="">
+        </div>
+
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img24.jpg' %}"
+                alt="">
+        </div>
+
+        <div class="img-panel">
+            <img class="img"
+                src="{% static 'images/img25.webp' %}"
+                alt="">
+        </div>
+
+    </section>
+
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% block script %}
+<script>
+    function imageViewer() {
+        let imgs = document.getElementsByClassName("img"),
+            out = document.getElementById("img-out");
+        for (let i = 0; i < imgs.length; i++) {
+
+            if (!imgs[i].classList.contains("el")) {
+
+                imgs[i].classList.add("el");
+                imgs[i].addEventListener("click", lightImage);
+                function lightImage() {
+                    let container = document.getElementsByClassName("img-panel")[i];
+                    container.classList.toggle("img-panel__selct");
+                };
+                imgs[i].addEventListener("click", openImage);
+                function openImage() {
+                    let imgElement = document.createElement("img"),
+                        imgWrapper = document.createElement("div"),
+                        imgClose = document.createElement("div"),
+                        container = document.getElementsByClassName("img-panel")[i];
+                    container.classList.add("img-panel__selct");
+                    imgElement.setAttribute("class", "image__selected");
+                    imgElement.src = imgs[i].src;
+                    imgWrapper.setAttribute("class", "img-wrapper");
+                    imgClose.setAttribute("class", "img-close");
+                    imgWrapper.appendChild(imgElement);
+                    imgWrapper.appendChild(imgClose);
+
+
+                    setTimeout(
+                        function () {
+                            imgWrapper.classList.add("img-wrapper__initial");
+                            imgElement.classList.add("img-selected-initial");
+                        }, 50);
+
+                    out.appendChild(imgWrapper);
+                    imgClose.addEventListener("click", function () {
+                        container.classList.remove("img-panel__selct");
+                        out.removeChild(imgWrapper);
+                    });
+                }
+            }
+        }
+    }
+    imageViewer();
+
+    let picRender = {
+        imgObjArr: [],
+        imgInput: document.getElementById("img-upload"),
+        imgOutput: document.getElementById("display-box"),
+        generateRandomId: function () {
+            let id = "";
+            for (let i = 0; i < 5; i++) {
+                id += Math.floor((Math.random() * 10) + 1);
+            }
+            return id;
+        },
+        renderImages: function () {
+            picRender.imgInput.addEventListener("change", function () {
+                for (let i = 0; i < picRender.imgInput.files.length; i++) {
+                    let randomId = picRender.generateRandomId(),
+                        imgObj = {
+                            imgEl: document.createElement("img"),
+                            imgPanel: document.createElement("div"),
+                            fileData: picRender.imgInput.files[i],
+                            fileName: picRender.imgInput.files[i].name,
+                            fileSize: picRender.imgInput.files[i].size,
+                            fileId: "fileId_" + picRender.imgInput.files[i].name + randomId,
+
+                            configImage: function () {
+                                this.imgEl.setAttribute("class", "img");
+                                this.imgEl.src = URL.createObjectURL(this.fileData);
+                                this.imgPanel.setAttribute("id", this.fileId);
+                                this.imgPanel.setAttribute("class", "img-panel");
+                                this.imgPanel.appendChild(this.imgEl);
+                                picRender.imgOutput.appendChild(this.imgPanel);
+                                imageViewer();
+                            }
+                        };
+                    imgObj.configImage();
+                    picRender.imgObjArr.push(imgObj);
+                };
+            });
+        },
+
+    }
+
+    picRender.renderImages();
+
+    class ImageViewer {
+        constructor(imgArr, imgContArr, imgOutput) {
+            this.imgArr = imgArr;
+            this.imgContArr = imgContArr;
+            this.imgOutput = imgOutput;
+            this.initialize();
+        }
+
+        initialize() {
+            for (let i = 0; i < this.imgArr.length; i++) {
+
+                let img = this.imgArr[i];
+
+                if (!img.classList.contains("el")) {
+
+                    img.classList.add("el");
+                    img.addEventListener("click", function () {
+
+                        let imgElement = document.createElement("div"),
+                            imgWrapper = document.createElement("div"),
+                            imgClose = document.createElement("div"),
+                            container = this.imgContArr[i];
+
+                        container.classList.toggle("img-panel__selct");
+                        imgClose.setAttribute("class", "img-close");
+                        imgElement.setAttribute("class", "image__selected");
+                        imgElement.src = imgs[i].src;
+                        imgWrapper.setAttribute("class", "img-wrapper");
+                        imgWrapper.appendChild(imgElement);
+                        imgWrapper.appendChild(imgClose);
+
+                        setTimeout(
+                            function () {
+                                imgWrapper.classList.add("img-wrapper__initial");
+                                imgElement.classList.add("img-selected-initial");
+                            }, 50);
+
+                        this.imgOutput.appendChild(imgWrapper);
+
+                        imgclose.addeventListener("click", function () {
+                            container.classList.remove("img-panel__selct");
+                            this.imgOutput.removeChild(imgWrapper);
+                        })
+
+                    });
+
+                }
+
+            }
+
+        }
+
+    }
+
+</script>
+{% endblock %}

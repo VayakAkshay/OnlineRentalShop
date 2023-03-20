@@ -7,7 +7,7 @@ from email.message import EmailMessage
 import ssl
 from django.contrib.auth import authenticate, login, logout
 import smtplib
-
+import time
 
 def LoginPage(request):
     if request.method == "POST":
@@ -25,7 +25,6 @@ def LoginPage(request):
     
 def RegesterPage(request):
     enable_otp = 0
-
     if request.method == "POST":
         first_name = request.POST.get("fname")
         last_name = request.POST.get("lname")
@@ -34,13 +33,14 @@ def RegesterPage(request):
         if User.objects.filter(username=email).exists():
             messages.warning(request,"This user is already exist")
         else:
+            OTP_Data.objects.filter(email_id = email).delete()
             otp_generate = random.randrange(1000, 9999)
             OTP_data = OTP_Data(email_id = email,otp = otp_generate)
             OTP_data.save()
     
             email_sender = 'dresswala322@gmail.com'
     
-            email_password = 'nngxxfdwczokkrep'
+            email_password = 'ygalrmlvufleddam'
             email_receiver = email
     
             subject = "OTP"
@@ -86,10 +86,8 @@ def forgot_otp(request):
         print(user)
         if user is not None:
             otp_generate = random.randrange(1000, 9999)
-            OTP_data = OTP_Data(email_id = email,otp = otp_generate)
-            OTP_data.save()
             email_sender = 'dresswala322@gmail.com'
-            email_password = 'nngxxfdwczokkrep'
+            email_password = 'ygalrmlvufleddam'
             email_receiver = email
             subject = "OTP"
             body = """
@@ -106,6 +104,8 @@ def forgot_otp(request):
                 smtp.login(email_sender, email_password)
                 smtp.sendmail(email_sender,email_receiver,em.as_string())
             enable_otp = 1
+            OTP_data = OTP_Data(email_id = email,otp = otp_generate)
+            OTP_data.save()
             return render(request,'Loginsystem/forgot.html',{"enable_otp":enable_otp})
         else:
             messages.warning(request,"Please Enter Valid username and Password")
@@ -120,11 +120,9 @@ def forgot_pass(request):
         print(mydata)
         otp_field = str(mydata)[-7:-3]
         print(otp_field)
-        print("DKMD")
         if otp == otp_field:
             otp_data = OTP_Data.objects.filter(email_id = email)
             otp_data.delete()
-            print("PASS")
             local_data = 1
             return render(request,"Loginsystem/forgot_pass.html",{"local_data":local_data})
         else:
