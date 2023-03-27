@@ -82,7 +82,7 @@
       overflow-y: hidden;
       white-space: nowrap;
       scrollbar-width: thin;
-      scrollbar-color: #b0d6e9 #ffffff;
+      scrollbar-color: #5b5b5b #fcfcfc;
     }
 
     .container .main .cards::-webkit-scrollbar {
@@ -94,9 +94,9 @@
     }
 
     .container .main .cards::-webkit-scrollbar-thumb {
-      background-color: #b0d6e9;
+      background-color: lavenderblush;
       border-radius: 10px;
-      border: 3px solid #ffffff;
+      border: 1px solid #ffffff;
     }
 
     .container .main .cards .card {
@@ -126,8 +126,10 @@
     }
 
     .container .main .cards .card .card-content button {
-      background-color: #24a8ea;
+      background-color: transparent;
       border: none;
+      color: black;
+      background-color: lavenderblush;
     }
 
     .container .contain {
@@ -141,7 +143,6 @@
       margin-top: 20px;
       display: flex;
       flex-wrap: wrap;
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       border-radius: 10px;
     }
 
@@ -185,8 +186,13 @@
       padding: 10px;
       font-size: 20px;
       width: 150px;
-      background-color: cadetblue;
-      border: none;
+      background-color: transparent;
+      border: 2px solid black;
+      transition-duration: 1s;
+    }
+    .container .contain .boxs .box2 .heading button:hover{
+      background-color: black;
+      color: white;
     }
 
     .container .contain .boxs .box1 .heading {
@@ -197,8 +203,13 @@
       padding: 10px;
       font-size: 20px;
       width: 150px;
-      background-color: cadetblue;
-      border: none;
+      background-color: transparent;
+      border: 2px solid black;
+      transition-duration: 1s;
+    }
+    .container .contain .boxs .box1 .heading button:hover{
+      background-color: black;
+      color: white;
     }
 
     @media screen and (max-width: 992px) {
@@ -360,7 +371,7 @@
               <input type="hidden" value="{{i.id}}" name="product_id" id="">
               <button type="submit" class="btn btn-primary">Add to cart</button>
             </form>
-          </div>
+          </div> 
         </div>
         {% endfor %}
       </div>

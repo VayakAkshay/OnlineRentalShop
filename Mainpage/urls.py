@@ -23,4 +23,5 @@ urlpatterns = [
     path('success/',views.success_page,name="success_page"),
     path('cancle/',views.cancle_page,name="cancle_page"),
     path('portfolio/',views.PortfolioPage,name="PortfolioPage"),
+    path('search/',views.SearchPage,name="SearchPage"),
 ]

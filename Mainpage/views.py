@@ -189,6 +189,14 @@ def PortfolioPage(request):
 def cancle_page(request):
     return render(request,"Mainpage/cancle.html")
 
+def SearchPage(request):
+    product_data = None
+    if request.method == "POST":
+        search = request.POST.get("query")
+        product_data = ProductData.objects.filter(product_name__icontains = search).values().all()
+        return render(request,"Mainpage/search.html",{"product_data":product_data,"search":search})
+    return render(request,"Mainpage/search.html",{"product_data":product_data})
+
 def logout_page(request):
     logout(request)
     return redirect("/")

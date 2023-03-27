@@ -39,7 +39,6 @@ def RegesterPage(request):
             OTP_data.save()
     
             email_sender = 'dresswala322@gmail.com'
-    
             email_password = 'ygalrmlvufleddam'
             email_receiver = email
     

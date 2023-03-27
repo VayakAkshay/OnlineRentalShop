@@ -76,11 +76,40 @@
 
         .main .container .part2 .rent-btn button {
             height: 50px;
-            background-color: #24a8ea;
+            background-color: #0052cc;
             border: none;
             padding-left: 20px;
             padding-right: 20px;
+            color: white;
         }
+
+        .counter {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .counter input {
+            width: 50px;
+            border: 0;
+            line-height: 30px;
+            font-size: 20px;
+            text-align: center;
+            background: #0052cc;
+            color: #fff;
+            appearance: none;
+            outline: 0;
+        }
+
+        .counter span {
+            display: block;
+            font-size: 25px;
+            padding: 0 10px;
+            cursor: pointer;
+            color: #0052cc;
+            user-select: none;
+        }
+
 
         @media screen and (max-width: 768px) {
             .main .container .part1 {
@@ -137,11 +166,10 @@
                     <h6>{{i.product_desc}}</h6><br>
                     <h5>₹ {{i.product_price}}</h5>
                 </div><br><br>
-                <div class="qty">
-                    <button onclick="dec_func()"><i style="font-size:15px; color: white;"
-                            class="fa">&#xf068;</i></button>
-                    <h4 id="qauntity">1</h4> <button onclick="inc_func()"><i style="font-size:15px; color: white;"
-                            class="fa">&#xf067;</i></button>
+                <div class="counter">
+                    <span class="down" onClick='decreaseCount(event, this)'>-</span>
+                    <input type="text" value="1">
+                    <span class="up" onClick='increaseCount(event, this)'>+</span>
                 </div><br><br>
                 <div class="rent-btn">
                     <form action="/Mycart/" method="post">{% csrf_token %}
@@ -150,6 +178,7 @@
                         <button type="submit" id="rent-btn">Rent Now</button>
                     </form>
                 </div>
+
             </div>
         </div>
         {% endfor %}
@@ -163,20 +192,24 @@
 </html>
 {% block script %}
 <script>
-    let value = 1
-    function inc_func() {
-        value = parseInt(document.getElementById("qauntity").innerText) + 1;
-        if (value > 10) {
-            value = 10;
-        }
-        document.getElementById("qauntity").innerText = value;
+    function increaseCount(a, b) {
+        var input = b.previousElementSibling;
+        var value = parseInt(input.value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        input.value = value;
+        document.getElementById("qtys").value = value;
     }
-    function dec_func() {
-        value = parseInt(document.getElementById("qauntity").innerText) - 1;
-        if (value < 1) {
-            value = 1;
+
+    function decreaseCount(a, b) {
+        var input = b.nextElementSibling;
+        var value = parseInt(input.value, 10);
+        if (value > 1) {
+            value = isNaN(value) ? 0 : value;
+            value--;
+            input.value = value;
+            document.getElementById("qtys").value = value;
         }
-        document.getElementById("qauntity").innerText = value;
     }
     document.getElementById("rent-btn").addEventListener("click", () => {
         document.getElementById("qtys").value = value
